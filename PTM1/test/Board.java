@@ -347,7 +347,7 @@ public class Board {
     }
 
     // this function returns if the given word if legal
-    Boolean isBoardValid(Word word) {
+    Boolean boardLegal(Word word) {
         if (!isWordOnBoard(word)) {
             return Boolean.FALSE;
         }
@@ -387,7 +387,7 @@ public class Board {
     }
 
     // Generates an ArrayList of new words
-    ArrayList<Word> generateWords(Word word) {
+    ArrayList<Word> getWords(Word word) {
 
         ArrayList<Word> wordList = new ArrayList<Word>();
         Tile[][] tmp = getTiles();
@@ -523,7 +523,7 @@ public class Board {
     }
 
     // Calculates the score of a word placed on the game board in game
-    int calcScore(Word word) {
+    int getScore(Word word) {
 
         int col = word.getCol();
         int row = word.getRow();
@@ -587,16 +587,16 @@ public class Board {
     }
 
     // Attempts to place a word on the game board and calculates the total score if the word placement is valid
-    int attemptPlaceWord(Word w) {
+    int tryPlaceWord(Word w) {
 
         int score = 0;
-        if (isBoardValid(w)) {
-            ArrayList<Word> wordList = generateWords(w);
+        if (boardLegal(w)) {
+            ArrayList<Word> wordList = getWords(w);
             for (Word word : wordList) {
                 placeWord(word);
             }
             for (Word word : wordList) {
-                score += calcScore(word);
+                score += getScore(word);
             }
         }
         return score;
